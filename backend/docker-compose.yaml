@@ -1,0 +1,27 @@
+version: "3.7"
+
+# 컴퓨터들
+services:
+  # 컴퓨터이름
+  my-backend:
+    build:
+      # 도커파일경로
+      context: .
+      # 도커파일명
+      dockerfile: Dockerfile
+      # 왼쪽 내컴퓨터 오른쪽 도커컴퓨터
+    volumes:
+      - ./index.js:/myfolder/index.js
+      - ./phone.js:/myfolder/phone.js
+      - ./user.js:/myfolder/user.js
+      - ./swagger:/myfolder/swagger
+    #포트 포워딩 기능 - 는 배열을 의미 - 배열요소 추가가능 
+    ports:
+    - 4000:4000  
+
+  # 컴퓨터이름
+  my-database:
+    # 도커파일 없이 이미지만 바로 생성
+    image: mongo:5
+    ports:
+    - 27017:27017  
